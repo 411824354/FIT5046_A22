@@ -1,5 +1,6 @@
 package A2.myapplication;
 
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -11,6 +12,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -56,7 +61,7 @@ public class LoginActivity extends AppCompatActivity {
                 //intent.setClass(LoginActivity.this,RegisterActivity.class);
                 //startActivity(intent);
                 startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
-
+                getFirstName();
             }
         });
         //找回密码控件的点击事件
@@ -88,6 +93,7 @@ public class LoginActivity extends AppCompatActivity {
                     // md5Psw.equals(); 判断，输入的密码加密后，是否与保存在SharedPreferences中一致
                 }else if(md5Psw.equals(spPsw)){
                     //一致登录成功
+                    getFirstName();
                     Toast.makeText(LoginActivity.this, "login successfully", Toast.LENGTH_SHORT).show();
                     //保存登录状态，在界面保存登录的用户名 定义个方法 saveLoginStatus boolean 状态 , userName 用户名;
                     saveLoginStatus(true, userName);
@@ -166,4 +172,46 @@ public class LoginActivity extends AppCompatActivity {
             }
         }
     }
+
+
+ //---------------------------------------------------------------------------------------------------
+ //
+     public void getFirstName(){
+         String username = et_user_name.getText().toString().trim();
+         GetFirstNameAsynckTask getFirstASK = new GetFirstNameAsynckTask();
+         getFirstASK.execute(username);
+    }
+
+
+//--------------------------------------------------------------------------------------------------------
+//ASK
+private class GetFirstNameAsynckTask extends AsyncTask<String, Void, String> {
+
+    @Override
+    protected String doInBackground(String... strings) {
+        return CallingRestFul.finUserFirstNameByUsername( strings[0] );
+
+    }
+    @Override
+    protected void onPostExecute(String result){
+
+
+        try {
+            JSONArray ja = new JSONArray( result );
+            JSONObject ja0 = ja.getJSONObject(0 );
+            JSONObject theUser = ja0.getJSONObject( "userId" );
+            String firtName = theUser.getString( "name" );
+            SharedPreferences sp = getSharedPreferences( "signUpInfo",MODE_PRIVATE );
+            SharedPreferences.Editor edt = sp.edit();
+            edt.putString( "firstName",firtName );
+            edt.commit();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+}
+
 }

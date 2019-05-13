@@ -2,6 +2,7 @@ package A2.myapplication;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 
 public class home_drawer extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,19 +24,24 @@ public class home_drawer extends AppCompatActivity
         setSupportActionBar(toolbar);
 //----------------------------------------------------------------------------------------------
 // files
-        TextView tv_time,tv_welcom;
+        TextView tv_time,tv_welcome;
 
 
 //----------------------------------------------------------------------------------------------
-//
-
-
+//  MAIN PROGRESS
 
 
         TextView tvDate= (TextView) findViewById(R.id.tv_time);
         //实时更新时间（1秒更新一次）
         TimeThread timeThread = new TimeThread(tvDate);//tvDate 是显示时间的控件TextView
         timeThread.start();//启动线程
+        getFirstName();
+
+
+//----------------------------------------------------------------------------------------------
+// welcome by first name
+
+
 
 
 
@@ -82,4 +89,27 @@ public class home_drawer extends AppCompatActivity
         drawer.closeDrawer( GravityCompat.START);
         return true;
     }
+
+//-----------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------
+// methods
+//---------------------------------------------------------------------------
+// get user first name method
+
+    public void getFirstName(){
+        SharedPreferences sp = getSharedPreferences( "signUpInfo",MODE_PRIVATE );
+        String firstname = sp.getString( "firstName","noname" );
+        TextView tv_welcome = findViewById( R.id.tv_home_welcome );
+        tv_welcome.setText( "welcome "+firstname+" !" );
+    }
+
+//----------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------
+// Asynck Tasks
+//------------------------------------------------------------------------------------------------------
+//----------------------------------------------
+//
+
+
+
 }
