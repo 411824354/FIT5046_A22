@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/login_back"
+    android:background="@drawable/home_back2"
     android:orientation="vertical"
 
     >
@@ -28,6 +28,9 @@
         android:gravity="center"
         android:textStyle="bold"/>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="82dp"></LinearLayout>
     <EditText
         android:id="@+id/et_user_name"
         android:layout_width="fill_parent"
@@ -44,7 +47,7 @@
         android:paddingLeft="8dp"
         android:singleLine="true"
         android:textColor="#000000"
-        android:textColorHint="#a3a3a3"
+        android:textColorHint="@color/colorAccent"
         android:textSize="14sp" />
 
 
@@ -64,10 +67,12 @@
         android:paddingLeft="8dp"
         android:singleLine="true"
         android:textColor="#000000"
-        android:textColorHint="#a3a3a3"
+        android:textColorHint="@color/colorAccent"
         android:textSize="14sp" />
 
-
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="35dp"></LinearLayout>
     <Button
         android:id="@+id/btn_login"
         android:layout_width="fill_parent"
@@ -94,14 +99,15 @@
             android:layout_width="173dp"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
-            android:background="@color/design_default_color_primary_dark"
+            android:background="@color/cardview_light_background"
             android:gravity="center"
             android:padding="8dp"
             android:text="Sign up"
             android:textAllCaps="false"
+            android:textColor="@color/colorAccent"
 
 
-            android:textSize="12sp" />
+            android:textSize="18sp" />
         <!--layout_weight="1" layout_width="0dp"实现均分效果-->
         <TextView
             android:id="@+id/editText"
@@ -117,12 +123,13 @@
             android:layout_width="165dp"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
-            android:background="@color/design_default_color_primary_dark"
+            android:background="@color/cardview_light_background"
             android:gravity="center"
             android:padding="8dp"
             android:text="Forget password?"
+            android:textColor="@color/colorAccent"
             android:textAllCaps="false"
-            android:textSize="12sp" />
+            android:textSize="15sp" />
     </LinearLayout>
 </LinearLayout>
 

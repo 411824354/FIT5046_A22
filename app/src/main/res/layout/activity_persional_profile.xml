@@ -169,11 +169,11 @@
         android:inputType="numberDecimal"
         android:gravity="center"/>
     <EditText
-        android:id="@+id/et_step_mile"
+        android:id="@+id/et_stepPer"
         android:layout_width="277dp"
         android:layout_height="wrap_content"
         android:hint="steps per mile"
-        android:inputType="numberDecimal"
+        android:inputType="number"
         android:drawableLeft="@drawable/ic_walk"
         android:gravity="center"/>
 
@@ -194,7 +194,7 @@
 
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btn_submit"
         android:layout_width="153dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"

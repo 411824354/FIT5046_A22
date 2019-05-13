@@ -14,7 +14,6 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,16 +25,14 @@ import java.util.List;
 
 public class PersonalProfile extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
     private TextView tv_main_title;//标题
-    private TextView tv_back,btnSingUp,btnFindPsw;//返回键,显示的注册，找回密码
+    private TextView tv_back;//返回键,显示的注册，找回密码
     private Button btn_submit;
     private EditText et_dob;
     private String email,dob,gender,address,firstname,surname;
-    private int height,loa,postCode,stepPer,weight;
-
-    private EditText et_address,et_email,et_height,et_weight,et_stepPer,et_postCode,et_surname,et_firstname;//编辑框
-    private Spinner sp_loa;
+    private int height,loa,postCode,weight,stepPer,userid;
+    private EditText et_address,et_email,et_height,et_stepPer,et_weight,et_postCode,et_surname,et_firstname;//编辑框
     private RadioButton rb_gd_m,rb_gd_f;
-    private RadioGroup rg_gender;
+
 
 
     @Override
@@ -58,13 +55,13 @@ public class PersonalProfile extends AppCompatActivity implements DatePickerDial
         et_dob = findViewById( R.id.et_dob );
         rb_gd_f = findViewById( R.id.rb_gd_f );
         rb_gd_m = findViewById( R.id.rb_gd_m );
-        rg_gender = findViewById( R.id.rg_gender );
-        et_stepPer = findViewById( R.id.et_step_mile );
+
         et_address = findViewById( R.id.et_address );
-        et_stepPer = findViewById( R.id.et_step_mile );
+        et_stepPer = findViewById( R.id.et_stepPer );
         et_postCode = findViewById( R.id.et_postCode );
         et_firstname = findViewById( R.id.et_firstName );
         et_surname = findViewById( R.id.et_lastName );
+        btn_submit = findViewById( R.id.btn_submit );
  //----------------------------------------------------------------------------------
  //submit button
 //register
@@ -78,17 +75,16 @@ public class PersonalProfile extends AppCompatActivity implements DatePickerDial
             weight = Integer.parseInt( et_weight.getText().toString() );
             address = et_address.getText().toString();
             dob = et_dob.getText().toString();
+            stepPer = Integer.parseInt( et_stepPer.getText().toString().trim() );
+            postCode = Integer.parseInt( et_postCode.getText().toString().trim() );
 
-            stepPer = Integer.parseInt( et_stepPer.getText().toString() );
-            postCode = Integer.parseInt( et_postCode.getText().toString() );
-            int userid = 1;
             firstname =et_firstname.getText().toString();
-            surname = et_firstname.getText().toString();
+            surname = et_surname.getText().toString();
 
 
-            User user = new User(userid, firstname, surname, email, height, weight, gender, address, postCode, loa, stepPer,dob);
+
             UserPostAsynckTask postUser = new UserPostAsynckTask();
-            postUser.execute( user );
+            postUser.execute( "", firstname, surname, email, String.valueOf( height), String.valueOf(weight), gender, address, String.valueOf(postCode), String.valueOf(loa), String.valueOf(stepPer),dob );
 
 
         }
@@ -171,7 +167,19 @@ public class PersonalProfile extends AppCompatActivity implements DatePickerDial
         } );
 
 
+
+
+
     }
+
+//-------------------------------------------------------------------------------
+
+
+
+
+
+//----------------------------------------------------------------------------------
+
 
 
 
@@ -209,23 +217,28 @@ public class PersonalProfile extends AppCompatActivity implements DatePickerDial
 // AsynckTasks
 //------------------------------------------------------------------------------------------------
 // UserPostAsynckTask
-    private class UserPostAsynckTask extends AsyncTask<User, Void, String>{
+    private class UserPostAsynckTask extends AsyncTask<String, Void, String>{
 
-    @Override
-    protected String doInBackground(User... users) {
-       CallingRestFul.createCredential(users[0]);
-        return null;
+        @Override
+        protected String doInBackground(String... strings) {
+           CallingRestFul.createCredential(strings[0],strings[1],strings[2],strings[3],strings[4],strings[5],strings[6],strings[7],strings[8],strings[9],strings[10],strings[11]);
+            return null;
+        }
+        @Override
+        protected void onPostExecute(String response) {
+            Toast.makeText(PersonalProfile.this, "create successfully", Toast.LENGTH_SHORT).show();
+        }
     }
-    @Override
-    protected void onPostExecute(String response) {
-        Toast.makeText(PersonalProfile.this, "create successfully", Toast.LENGTH_SHORT).show();
-    }
+//-----------------------------------
+//
+
+
 
 }
 
 
 
 
-}
+
 
 
