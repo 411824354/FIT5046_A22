@@ -3,16 +3,14 @@ package A2.myapplication;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.View;
+import android.widget.TextView;
 
 public class home_drawer extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -22,8 +20,26 @@ public class home_drawer extends AppCompatActivity
         setContentView(R.layout.activity_home_drawer);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+//----------------------------------------------------------------------------------------------
+// files
+        TextView tv_time,tv_welcom;
 
 
+//----------------------------------------------------------------------------------------------
+//
+
+
+
+
+        TextView tvDate= (TextView) findViewById(R.id.tv_time);
+        //实时更新时间（1秒更新一次）
+        TimeThread timeThread = new TimeThread(tvDate);//tvDate 是显示时间的控件TextView
+        timeThread.start();//启动线程
+
+
+
+//-----------------------------------------------------------------------------------------------
+//drawer layout
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open,

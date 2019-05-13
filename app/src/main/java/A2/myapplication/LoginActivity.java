@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 
 public class LoginActivity extends AppCompatActivity {
-    private TextView tv_main_title;//标题
+
     private TextView tv_back,btnSingUp,btnFindPsw;//返回键,显示的注册，找回密码
     private Button btn_login;//登录按钮
     private String userName,psw,spPsw;//获取的用户名，密码，加密密码
@@ -30,8 +30,8 @@ public class LoginActivity extends AppCompatActivity {
     //获取界面控件
     private void init() {
         //从main_title_bar中获取的id
-        tv_main_title=findViewById(R.id.tv_main_title);
-        tv_main_title.setText("Log in");
+
+
         tv_back=findViewById(R.id.tv_back);
         //从activity_login.xml中获取的
         btnSingUp=findViewById(R.id.btn_SignUp);

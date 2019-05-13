@@ -47,7 +47,7 @@ public class PersonalProfile extends AppCompatActivity implements DatePickerDial
 
 
     private void init(){
-        tv_main_title = findViewById( R.id.tv_main_title );
+
         tv_back = findViewById( R.id.tv_back );
         et_email = findViewById( R.id.et_email );
         et_height = findViewById( R.id.et_height );

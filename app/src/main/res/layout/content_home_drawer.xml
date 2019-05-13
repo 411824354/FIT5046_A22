@@ -6,6 +6,18 @@
         android:padding="@dimen/activity_horizontal_margin"
         android:background="@drawable/login_back">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="45dp"/>
+
+    <TextView
+        android:id="@+id/tv_time"
+        android:layout_width="379dp"
+        android:layout_height="63dp"
+
+        android:gravity="center"
+        android:text="time"
+        android:textSize="26dp" />
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="302dp"
@@ -14,15 +26,21 @@
     <FrameLayout
         android:layout_height="match_parent"
         android:layout_width="match_parent"
-        android:id="@+id/content_frame">
+        android:id="@+id/content_frame"
+        android:layout_gravity="center_horizontal">
+
+
+
 
         <TextView
-            android:id="@+id/tvz_home_welcome"
+            android:id="@+id/tv_home_welcome"
             android:layout_width="378dp"
             android:layout_height="102dp"
             android:gravity="center"
             android:text="Welcome"
             android:textSize="26dp" />
+
+
     </FrameLayout>
 
 

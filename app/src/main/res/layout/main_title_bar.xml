@@ -15,13 +15,9 @@
         android:layout_height="35dp"
         android:layout_alignParentLeft="true"
         android:background="@drawable/ic_arrow_back_black_24dp" />
-    <TextView
-        android:id="@+id/tv_main_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
 
-        android:textSize="20sp"/>
+
+
     <!--其中android:background="@drawable/go_back_selector"为点击回退键时，会变化效果，其实就是一个点击更换个图片而已。-->
     <!--我们先用这种老方法，接下来以后的文章才做代码优化效果-->
 </RelativeLayout>
