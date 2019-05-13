@@ -81,10 +81,17 @@ public class PersonalProfile extends AppCompatActivity implements DatePickerDial
             firstname =et_firstname.getText().toString();
             surname = et_surname.getText().toString();
 
-
-
+//------------------------------------------------------------------------
+//post user
             UserPostAsynckTask postUser = new UserPostAsynckTask();
             postUser.execute( "", firstname, surname, email, String.valueOf( height), String.valueOf(weight), gender, address, String.valueOf(postCode), String.valueOf(loa), String.valueOf(stepPer),dob );
+//------------------------------------
+//post credential
+            CredentialPostAsynckTask postCredential = new CredentialPostAsynckTask();
+            postCredential.execute( username , pasword,"", firstname, surname, email, String.valueOf( height), String.valueOf(weight), gender, address, String.valueOf(postCode), String.valueOf(loa), String.valueOf(stepPer),dob );
+
+
+
 
 
         }
@@ -221,17 +228,29 @@ public class PersonalProfile extends AppCompatActivity implements DatePickerDial
 
         @Override
         protected String doInBackground(String... strings) {
-           CallingRestFul.createCredential(strings[0],strings[1],strings[2],strings[3],strings[4],strings[5],strings[6],strings[7],strings[8],strings[9],strings[10],strings[11]);
+           CallingRestFul.postUserIfo(strings[0],strings[1],strings[2],strings[3],strings[4],strings[5],strings[6],strings[7],strings[8],strings[9],strings[10],strings[11]);
             return null;
         }
         @Override
         protected void onPostExecute(String response) {
-            Toast.makeText(PersonalProfile.this, "create successfully", Toast.LENGTH_SHORT).show();
+            Toast.makeText(PersonalProfile.this, "user create successfully", Toast.LENGTH_SHORT).show();
         }
     }
 //-----------------------------------
-//
+//post credential AsynckTask
 
+    private class CredentialPostAsynckTask extends AsyncTask<String, Void, String>{
+
+        @Override
+        protected String doInBackground(String... strings) {
+            CallingRestFul.postCredential(strings[0],strings[1],strings[2],strings[3],strings[4],strings[5],strings[6],strings[7],strings[8],strings[9],strings[10],strings[11],strings[12],strings[13]);
+            return null;
+        }
+        @Override
+        protected void onPostExecute(String response) {
+            Toast.makeText(PersonalProfile.this, "credential create successfully", Toast.LENGTH_SHORT).show();
+        }
+    }
 
 
 }

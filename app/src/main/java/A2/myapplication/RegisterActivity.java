@@ -137,7 +137,7 @@ public class RegisterActivity extends AppCompatActivity{
         String md5Psw = MD5Utils.md5(psw);//把密码用MD5加密
         //loginInfo表示文件名, mode_private SharedPreferences sp = getSharedPreferences( );
         SharedPreferences sp=getSharedPreferences("loginInfo", MODE_PRIVATE);
-        SharedPreferences spU=getSharedPreferences( "singUpUser",MODE_PRIVATE );
+        SharedPreferences spU=getSharedPreferences( "signUpUser",MODE_PRIVATE );
         //获取编辑器， SharedPreferences.Editor  editor -> sp.edit();
         SharedPreferences.Editor editor=sp.edit();
 
