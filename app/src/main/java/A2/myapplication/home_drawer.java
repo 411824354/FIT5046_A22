@@ -56,7 +56,7 @@ public class home_drawer extends AppCompatActivity
         NavigationView navigationView = (NavigationView)
                 findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        getSupportActionBar().setTitle("Navigation Drawer");
+        getSupportActionBar().setTitle("Calorie Tracker");
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.content_frame, new
                 MainFragment()).commit();
@@ -66,6 +66,9 @@ public class home_drawer extends AppCompatActivity
         int id = item.getItemId();
         Fragment nextFragment = null;
         switch (id) {
+            case R.id.nav_Home_unit:
+                nextFragment = new MainFragment();
+                break;
             case R.id.nav_steps_unit:
                 nextFragment = new StepsUnitFragment();
                 break;

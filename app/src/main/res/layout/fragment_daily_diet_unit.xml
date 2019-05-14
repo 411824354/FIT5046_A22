@@ -1,14 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/cardview_light_background"
+    android:orientation="vertical"
+    android:gravity="center"
 >
 
-    <FrameLayout
-        android:id="@+id/frag_daily"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/design_default_color_primary_dark"></FrameLayout>
+    <LinearLayout
+        android:layout_width="243dp"
+        android:layout_height="55dp"
+
+        >
+
+        <TextView
+
+            android:layout_width="131dp"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="75dp"
+            tools:layout_editor_absoluteY="83dp" />
+
+        <Spinner
+            android:id="@+id/sp_foodCate_daily"
+            android:layout_width="111dp"
+            android:layout_height="wrap_content"
+
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="186dp"
+            tools:layout_editor_absoluteY="178dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="243dp"
+        android:layout_height="55dp"
+        >
+
+        <TextView
+            android:id="@+id/sp_foodItems_daily"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="75dp"
+            tools:layout_editor_absoluteY="83dp" />
+
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="113dp"
+            android:layout_height="wrap_content"
+
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="186dp"
+            tools:layout_editor_absoluteY="178dp" />
+    </LinearLayout>
 
 
-</RelativeLayout>
+    <Button
+        android:id="@+id/button7"
+        android:layout_width="149dp"
+        android:layout_height="72dp"
+        android:background="@drawable/pingk_et_bg"
+        android:text="Button"
+        android:textColor="@color/cardview_light_background"
+
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="134dp"
+        tools:layout_editor_absoluteY="298dp" />
+
+
+
+
+
+</LinearLayout>

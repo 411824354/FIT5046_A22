@@ -13,5 +13,8 @@ public class MainFragment extends Fragment {
             savedInstanceState) {
         vMain = inflater.inflate(R.layout.fragment_main, container, false);
         return vMain;
+
     }
+
+
 }

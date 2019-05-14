@@ -68,7 +68,7 @@
             tools:layout_editor_absoluteY="78dp" />
     </LinearLayout>
 
-    <EditText
+        <EditText
         android:id="@+id/et_email"
         android:layout_width="278dp"
         android:layout_height="wrap_content"
