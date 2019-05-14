@@ -3,33 +3,40 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="@dimen/activity_horizontal_margin"
+
         android:background="@drawable/login_back">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="45dp"/>
 
-    <TextView
-        android:id="@+id/tv_time"
-        android:layout_width="379dp"
-        android:layout_height="63dp"
-
-        android:gravity="center"
-        android:text="time"
-        android:textSize="26dp" />
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="302dp"
-        android:src="@drawable/home_image1" />
 
     <FrameLayout
         android:layout_height="match_parent"
         android:layout_width="match_parent"
         android:id="@+id/content_frame"
-        android:layout_gravity="center_horizontal">
+        >
+<LinearLayout
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="vertical">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:layout_gravity="clip_horizontal" />
 
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="379dp"
+            android:layout_height="63dp"
+            android:layout_gravity="clip_horizontal"
+            android:gravity="center"
+            android:text="time"
+            android:textSize="26dp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="297dp"
+            android:layout_gravity="clip_horizontal"
+            android:src="@drawable/home_image1" />
 
 
         <TextView
@@ -38,9 +45,10 @@
             android:layout_height="102dp"
             android:gravity="center"
             android:text="Welcome"
-            android:textSize="26dp" />
+            android:textSize="26dp"
+            android:layout_gravity="clip_horizontal"/>
 
-
+</LinearLayout>
     </FrameLayout>
 
 
