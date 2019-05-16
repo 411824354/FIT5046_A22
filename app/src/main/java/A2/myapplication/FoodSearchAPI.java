@@ -6,7 +6,6 @@ import org.json.JSONObject;
 
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.Dictionary;
 import java.util.Scanner;
 
 public class FoodSearchAPI {
@@ -42,21 +41,7 @@ public class FoodSearchAPI {
 
 
 
-    private String getSnippet(String result){
 
-        String snippet = null;
-        try{
-            JSONObject jsonObject = new JSONObject(result);
-            JSONArray jsonArray = jsonObject.getJSONArray("items");
-            if(jsonArray != null && jsonArray.length() > 0) {
-                snippet =jsonArray.getJSONObject(0).getString("snippet");
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-            snippet = "NO INFO FOUND";
-        }
-        return snippet;
-    }
 
     public static String getNdno(String str) {
 
@@ -74,10 +59,10 @@ public class FoodSearchAPI {
 
     }
 
-    public static Dictionary getFoodDetail(String keyword){
+    public static String getFoodDetail(String keyword){
         String str = search( keyword );
         String ndbno = getNdno( str );
-        Dictionary result = null;
+        String result = null;
         String foodName = "";
         String fatAMO = "";
         String calorieAMO = "";
@@ -115,7 +100,7 @@ public class FoodSearchAPI {
             JSONObject foodItem = food.getJSONObject( "food" );
             JSONArray nutrients = foodItem.getJSONArray( "nutrients" );
 
-            servingUNT =  getUnit(foodItem);
+            servingUNT =  getUnit(nutrients);
             foodName = getFoodName(foodItem);
             calorieAMO = getCalorieAMO(nutrients);
             fatAMO =  getFatAMO(nutrients);
@@ -125,10 +110,12 @@ public class FoodSearchAPI {
         }
 
 
-        result.put( "name",foodName );
+       /* result.put( "name",foodName );
         result.put( "calorieAMO",calorieAMO );
         result.put( "servingUNT",servingUNT );
-        result.put( "fatAMO",fatAMO );
+        result.put( "fatAMO",fatAMO );*/
+
+        result =  foodName+","+servingUNT+","+calorieAMO+","+fatAMO;
 
         return result;
 
@@ -147,80 +134,74 @@ public class FoodSearchAPI {
             e.printStackTrace();
         }
 
-        return null;
+        return "no name";
 
     }
 
 
     private static String getCalorieAMO(JSONArray nutrients){
 
-        int result = 0;
+
 
         try {
-            JSONObject energy = nutrients.getJSONObject( 0 );
-            String calories = energy.getString( "value" );
 
+                for (int i = 0; i < nutrients.length(); i++) {
+                    JSONObject nutriItem = nutrients.getJSONObject( i );  // 遍历 jsonarray 数组，把每一个对象转成 json 对象
+                    if (nutriItem.getString( "name" ).trim().equals("Energy")){
+                        String result = nutriItem.getString("value"  );
+                        return result;
 
-            return calories;
+                    }
+                }
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        return null;
+        return "no colories";
 
     }
 
-    private static String getUnit(JSONObject job){
+    private static String getUnit(JSONArray jay){
         try {
 
-            JSONObject desc = job.getJSONObject( "desc" );
-            String unit = desc.getString( "ru" );
+            JSONObject nutri = jay.getJSONObject( 0);
+            JSONArray measures = nutri.getJSONArray( "measures" );
+            JSONObject  lable = measures.getJSONObject( 0 );
+            String unit = lable.getString( "label" );
             return unit;
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        return "not found";
+        return "no unit";
     }
 
 
     private static String getFatAMO(JSONArray nutrients){
 
-        int result = 0;
 
         try {
-            JSONObject fat = nutrients.getJSONObject( 1 );
-            String fatAMO = fat.getString( "value" );
+            for (int i = 0; i < nutrients.length(); i++) {
+                JSONObject nutriItems = nutrients.getJSONObject( i );  // 遍历 jsonarray 数组，把每一个对象转成 json 对象
+                if (nutriItems.getString( "nutrient_id" ).trim().equals("204")){
+                    String fat = nutriItems.getString( "value" );
+                    return fat;
+                }
+            }
 
 
-            return fatAMO;
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        return null;
+        return "no fat";
 
     }
 
 
-    private int getServingAMO(JSONArray nutrients){
 
-        int result = 0;
 
-        try {
-            JSONObject energy = nutrients.getJSONObject( 1 );
-            JSONArray measures = energy.getJSONArray( "measures" );
-            JSONObject measure = measures.getJSONObject( 0 );
-            String calories = measure.getString( "eqv" );
-            result = Integer.parseInt( calories );
-            return result;
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
 
-        return 0;
-
-    }
 
  //----------------------------------------------------------------
 }
