@@ -1,48 +1,47 @@
 package A2.myapplication;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
 
-import org.json.JSONException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+//---------------------------------------------
+        List<HashMap<String, String>> unitListArray;
+        SimpleAdapter myListAdapter;
+        ListView foodList;
+        HashMap<String,String> map = new HashMap<String,String>();
+        String[] colHEAD = new String[] {"name","unit","calorie","fat"};
+        int[] dataCell = new int[] {R.id.list_food_name,R.id.list_food_servingUnit,R.id.list_foodCalorie,R.id.list_foodFat};
+//----------------------------------------------------
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_test_api);
-        final EditText editText=(EditText) findViewById(R.id.et_keyword) ;
-        Button btnSearch = (Button) findViewById(R.id.btnFind);
-        btnSearch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String keyword = editText.getText().toString();
-                SearchAsyncTask searchAsyncTask=new SearchAsyncTask();
-                searchAsyncTask.execute(keyword);
-            }
-        });
-    }
-    private class SearchAsyncTask extends AsyncTask<String, Void, String> {
-        @Override
-        protected String doInBackground(String... params) {
-            String resualt = SearchGoogleAPI.search(params[0]);
-            try {
-                return SearchGoogleAPI.getNdno( resualt );
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            return "not found";
-        }
-        @Override
-        protected void onPostExecute(String result) {
-            TextView tv= (TextView) findViewById(R.id.tv_searchResualt);
-           // tv.setText(SearchGoogleAPI.getSnippet(result));
-            tv.setText( result );
+        setContentView(R.layout.food_list_view);
 
-        }
+        foodList = this.findViewById(R.id.tv_foodList);
+        unitListArray = new ArrayList<HashMap<String, String>>();
+
+        map.put("name", "FIT5046");
+        map.put("unit", "Mobile and distributed Computing");
+        map.put("calorie","Sem1 2019");
+        map.put("fat","123");
+        unitListArray.add(map);
+
+
+    }
+
+
+
+
+    private void setUpList(){
+
+
+
     }
 }
+

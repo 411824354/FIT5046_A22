@@ -13,6 +13,24 @@ public class DailyDietUnitFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle
             savedInstanceState) {
         vEnterUnit = inflater.inflate(R.layout.fragment_daily_diet_unit, container, false);
+
+
+        init();
+
+
+
+
+
+
         return vEnterUnit;
+
+
+
+
+    }
+
+    public void init(){
+
+
     }
 }
