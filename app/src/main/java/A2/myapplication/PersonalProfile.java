@@ -1,6 +1,7 @@
 package A2.myapplication;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
@@ -63,8 +64,17 @@ public class PersonalProfile extends AppCompatActivity implements DatePickerDial
         et_surname = findViewById( R.id.et_lastName );
         btn_submit = findViewById( R.id.btn_submit );
  //----------------------------------------------------------------------------------
+ //back
+        tv_back.setOnClickListener( new TextView.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity( new Intent( PersonalProfile.this,RegisterActivity.class ) );
+            }
+        } );
+ //------------------
  //submit button
 //register
+
     btn_submit.setOnClickListener( new Button.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -91,7 +101,10 @@ public class PersonalProfile extends AppCompatActivity implements DatePickerDial
             postCredential.execute( username , pasword,"", firstname, surname, email, String.valueOf( height), String.valueOf(weight), gender, address, String.valueOf(postCode), String.valueOf(loa), String.valueOf(stepPer),dob );
 
 
+//to home page
 
+            startActivity( new Intent( PersonalProfile.this, Home_drawer.class ) );
+            PersonalProfile.this.finish();
 
 
         }

@@ -9,33 +9,35 @@
 >
 
 
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="60dp" />
+
     <TextView
-        android:gravity="center"
         android:id="@+id/tv_foodCategory"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:text="FOOD CATEGORY:"
 
-         />
+        />
 
     <Spinner
         android:id="@+id/sp_foodCate_daily"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="25dp"
+        android:background="@color/colorPrimary"
         android:gravity="center"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="186dp"
         tools:layout_editor_absoluteY="178dp" />
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="302dp">
 
-        <ListView
-            android:id="@+id/tv_foodList"
-            android:layout_width="match_parent"
-            android:layout_height="399dp" />
-    </ScrollView>
+    <ListView
+        android:id="@+id/tv_foodList"
+        android:layout_width="match_parent"
+        android:layout_height="269dp" />
+
 
     <Space
         android:layout_width="match_parent"
@@ -59,7 +61,7 @@
         android:layout_height="16dp" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btn_searchFood"
         android:layout_width="284dp"
         android:layout_height="72dp"
         android:background="@drawable/pingk_et_bg"

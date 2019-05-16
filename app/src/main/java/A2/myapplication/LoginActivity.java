@@ -107,7 +107,7 @@ public class LoginActivity extends AppCompatActivity {
                     //销毁登录界面
                     LoginActivity.this.finish();
                     //跳转到主界面，登录成功的状态传递到 MainActivity 中
-                    startActivity(new Intent(LoginActivity.this, home_drawer.class));
+                    startActivity(new Intent(LoginActivity.this, Home_drawer.class));
 
                     return;
                 }else if((spPsw!=null&&!TextUtils.isEmpty(spPsw)&&!md5Psw.equals(spPsw))){

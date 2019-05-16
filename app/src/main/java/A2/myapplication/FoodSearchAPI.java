@@ -43,6 +43,7 @@ public class FoodSearchAPI {
 
 
     private String getSnippet(String result){
+
         String snippet = null;
         try{
             JSONObject jsonObject = new JSONObject(result);
@@ -58,6 +59,7 @@ public class FoodSearchAPI {
     }
 
     public static String getNdno(String str) {
+
         String ndbno = null;
         try {
         JSONObject resualt = new JSONObject( str );
@@ -72,14 +74,14 @@ public class FoodSearchAPI {
 
     }
 
-    public Dictionary getFoodDetail(String str){
+    public static Dictionary getFoodDetail(String keyword){
+        String str = search( keyword );
         String ndbno = getNdno( str );
         Dictionary result = null;
         String foodName = "";
-        int fatAMO = 0;
-        int calorieAMO = 0;
+        String fatAMO = "";
+        String calorieAMO = "";
         String servingUNT = "";
-        int servingAMO = 0;
         String apiURl = "https://api.nal.usda.gov/ndb/V2/reports?ndbno=";
         URL url = null;
         String type = "&type=f&format=json&api_key=";
@@ -110,11 +112,11 @@ public class FoodSearchAPI {
             JSONObject info = new JSONObject( textResult );
             JSONArray foods = info.getJSONArray( "foods" );
             JSONObject food = foods.getJSONObject( 0 );
-            JSONArray nutrients = food.getJSONArray( "nutrients" );
+            JSONObject foodItem = food.getJSONObject( "food" );
+            JSONArray nutrients = foodItem.getJSONArray( "nutrients" );
 
-            servingUNT = getUnit(food);
-            servingAMO = getServingAMO(nutrients);
-            foodName = getFoodName(food);
+            servingUNT =  getUnit(foodItem);
+            foodName = getFoodName(foodItem);
             calorieAMO = getCalorieAMO(nutrients);
             fatAMO =  getFatAMO(nutrients);
 
@@ -126,7 +128,6 @@ public class FoodSearchAPI {
         result.put( "name",foodName );
         result.put( "calorieAMO",calorieAMO );
         result.put( "servingUNT",servingUNT );
-        result.put( "servingAMO",servingAMO );
         result.put( "fatAMO",fatAMO );
 
         return result;
@@ -136,7 +137,7 @@ public class FoodSearchAPI {
 //---------------------------------------------------------
 // extract food detail methods
 
-    private String getFoodName(JSONObject job){
+    private static String getFoodName(JSONObject job){
         try {
 
             JSONObject desc = job.getJSONObject( "desc" );
@@ -151,26 +152,25 @@ public class FoodSearchAPI {
     }
 
 
-    private int getCalorieAMO(JSONArray nutrients){
+    private static String getCalorieAMO(JSONArray nutrients){
 
         int result = 0;
 
         try {
             JSONObject energy = nutrients.getJSONObject( 0 );
-            JSONArray measures = energy.getJSONArray( "measures" );
-            JSONObject measure = measures.getJSONObject( 0 );
-            String calories = measure.getString( "value" );
-            result = Integer.parseInt( calories );
-            return result;
+            String calories = energy.getString( "value" );
+
+
+            return calories;
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-            return 0;
+        return null;
 
     }
 
-    private String getUnit(JSONObject job){
+    private static String getUnit(JSONObject job){
         try {
 
             JSONObject desc = job.getJSONObject( "desc" );
@@ -184,22 +184,21 @@ public class FoodSearchAPI {
     }
 
 
-    private int getFatAMO(JSONArray nutrients){
+    private static String getFatAMO(JSONArray nutrients){
 
         int result = 0;
 
         try {
-            JSONObject energy = nutrients.getJSONObject( 1 );
-            JSONArray measures = energy.getJSONArray( "measures" );
-            JSONObject measure = measures.getJSONObject( 0 );
-            String calories = measure.getString( "value" );
-            result = Integer.parseInt( calories );
-            return result;
+            JSONObject fat = nutrients.getJSONObject( 1 );
+            String fatAMO = fat.getString( "value" );
+
+
+            return fatAMO;
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        return 0;
+        return null;
 
     }
 
