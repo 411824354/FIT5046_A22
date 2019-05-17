@@ -103,7 +103,7 @@ public class PersonalProfile extends AppCompatActivity implements DatePickerDial
 
 //to home page
 
-            startActivity( new Intent( PersonalProfile.this, Home_drawer.class ) );
+            startActivity( new Intent( PersonalProfile.this, LoginActivity.class ) );
             PersonalProfile.this.finish();
 
 

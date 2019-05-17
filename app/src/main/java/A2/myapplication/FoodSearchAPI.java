@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class FoodSearchAPI {
 
     public static String search(String keyword) {
-        String API_KEY = "&sort=n&max=25&offset=0&api_key=CtBfz5VnJPdTnbCXaAmxTrkV2Ubjmcftcqtpm05o";
+        final String API_KEY = "&sort=n&max=25&offset=0&api_key=CtBfz5VnJPdTnbCXaAmxTrkV2Ubjmcftcqtpm05o";
         keyword = keyword.trim().replace(" ", "+");
         URL url = null;
         HttpURLConnection connection = null;
@@ -67,7 +67,7 @@ public class FoodSearchAPI {
         String fatAMO = "";
         String calorieAMO = "";
         String servingUNT = "";
-        String apiURl = "https://api.nal.usda.gov/ndb/V2/reports?ndbno=";
+        final String apiURl = "https://api.nal.usda.gov/ndb/V2/reports?ndbno=";
         URL url = null;
         String type = "&type=f&format=json&api_key=";
         String apiKey = "CtBfz5VnJPdTnbCXaAmxTrkV2Ubjmcftcqtpm05o";
@@ -182,7 +182,7 @@ public class FoodSearchAPI {
 
         try {
             for (int i = 0; i < nutrients.length(); i++) {
-                JSONObject nutriItems = nutrients.getJSONObject( i );  // 遍历 jsonarray 数组，把每一个对象转成 json 对象
+                JSONObject nutriItems = nutrients.getJSONObject( i );
                 if (nutriItems.getString( "nutrient_id" ).trim().equals("204")){
                     String fat = nutriItems.getString( "value" );
                     return fat;

@@ -18,7 +18,7 @@ import java.util.Scanner;
 public class CallingRestFul {
 
     private static final String BASE_URL =
-            "http://118.138.68.134:8080/WebApplication4/webresources/";
+            "http://10.0.2.2:8080/WebApplication4/webresources/";
 
 
 //--------------------------------------------------------------------------
@@ -229,7 +229,7 @@ public static int getCurrentId() {
     //--------------------------------------------------------------------------
 // find food by category
     public static String findFoodByCategory(String category) {
-        final String methodPath = "qq.food/";
+        final String methodPath = "qq.food/findByCategory/";
         //initialise
         URL url = null;
         HttpURLConnection conn = null;
@@ -261,6 +261,78 @@ public static int getCurrentId() {
         return textResult;
     }
 
+//-----------------------------------------------------------------------------
+// find user password by username
+    public static String findPassword(String username) {
+        final String methodPath = "qq.credential/findByUsername/";
+        //initialise
+        URL url = null;
+        HttpURLConnection conn = null;
+        String textResult = "";
+//Making HTTP request
+        try {
+            url = new URL(BASE_URL + methodPath+username);
+//open the connection
+            conn = (HttpURLConnection) url.openConnection();
+//set the timeout
+            conn.setReadTimeout(10000);
+            conn.setConnectTimeout(15000);
+//set the connection method to GET
+            conn.setRequestMethod("GET");
+//add http headers to set your response type to json
+            conn.setRequestProperty("Content-Type", "application/json");
+            conn.setRequestProperty("Accept", "application/json");
+//Read the response
+            Scanner inStream = new Scanner(conn.getInputStream());
+//read the input steream and store it as string
+            while (inStream.hasNextLine()) {
+                textResult += inStream.nextLine();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            conn.disconnect();
+        }
+        return textResult;
+    }
+
+//---------------------------------------------------
+    //find by userID
+    public static String findUserById(int uid) {
+        final String methodPath = "qq.users/";
+        //initialise
+        URL url = null;
+        HttpURLConnection conn = null;
+        String textResult = "";
+        //Making HTTP request
+        try {
+            url = new URL(BASE_URL + methodPath + uid);
+            //open the connection
+            conn = (HttpURLConnection) url.openConnection();
+            //set the timeout
+            conn.setReadTimeout(10000);
+            conn.setConnectTimeout(15000);
+            //set the connection method to GET
+            conn.setRequestMethod("GET");
+            //add http headers to set your response type to json
+            conn.setRequestProperty("Content-Type", "application/json");
+            conn.setRequestProperty("Accept", "application/json");
+            //Read the response
+            Scanner inStream = new Scanner(conn.getInputStream());
+            //read the input steream and store it as string
+            while (inStream.hasNextLine()) {
+                textResult += inStream.nextLine();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            conn.disconnect();
+        }
+        return textResult;
+    }
+
+//--------------------------------------------------------
+//f
 
 
 

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<fragment
+    android:id="@+id/map"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -20,4 +21,4 @@
         android:text="TextView"
         tools:layout_editor_absoluteX="136dp"
         tools:layout_editor_absoluteY="97dp" />
-</android.support.constraint.ConstraintLayout>
+</fragment>

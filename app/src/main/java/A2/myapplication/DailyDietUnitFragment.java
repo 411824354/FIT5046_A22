@@ -3,6 +3,7 @@ package A2.myapplication;
 
 import android.app.Fragment;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,10 @@ import android.widget.SimpleAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -26,8 +31,8 @@ public class DailyDietUnitFragment extends Fragment {
     ListView foodList;
 
     HashMap<String,String> map = new HashMap<String,String>();
-    String[] colHEAD = new String[] {"name","unit","calorie","fat"};
-    int[] dataCell = new int[] {R.id.list_food_name,R.id.list_food_servingUnit,R.id.list_foodCalorie,R.id.list_foodFat};
+    String[] colHEAD = new String[] {"name","category","servingUnit","calorieAmount","fat"};
+    int[] dataCell = new int[] {R.id.list_food_name,R.id.list_food_category,R.id.list_food_servingUnit,R.id.list_foodCalorie,R.id.list_foodFat};
 
     String category;
     Button searchFood;
@@ -64,16 +69,9 @@ public class DailyDietUnitFragment extends Fragment {
 
 
 
-        foodListArray = new ArrayList<HashMap<String, String>>();
-        foodList = vEnterUnit.findViewById(R.id.tv_foodList);
 
-        map.put("name", "FIT5046");
-        map.put("unit", "Mobile and distributed Computing");
-        map.put("calorie","Sem1 2019");
-        map.put("fat","123");
-        foodListArray.add(map);
-        myListAdapter = new SimpleAdapter(getActivity(),foodListArray,R.layout.food_list_view,colHEAD,dataCell);
-        foodList.setAdapter(myListAdapter);
+
+
 
 
         //spinner
@@ -107,9 +105,52 @@ public class DailyDietUnitFragment extends Fragment {
                 String selectedCategory = parent.getItemAtPosition( position ).toString();
                 if(selectedCategory != null){
 
+
                     category = selectedCategory;
+                    new AsyncTask<String, Void, String>() {
+                        @Override
+                        protected String doInBackground(String... strings) {
+                            return CallingRestFul.findFoodByCategory( strings[0] );
+                        }
+                        @Override
+                        protected void onPostExecute(String response){
+                            foodListArray = new ArrayList<HashMap<String, String>>();
+                            foodList = vEnterUnit.findViewById(R.id.tv_foodList);
+                            try {
+                                JSONArray findList = new JSONArray( response );
+
+                                for (int i = 0; i<findList.length();i++){
+                                    JSONObject itemFood = findList.getJSONObject( i );
+
+                                    String name = itemFood.getString( "name" );
+                                    String calorieAmount = itemFood.getString("calorieAmount");
+                                    String category = itemFood.getString( "category" );
+                                    String fat = itemFood.getString( "fat" );
+                                    String servingUnit = itemFood.getString( "servingUnit" );
+                                    map.put("name", name);
+                                    map.put( "category",category );
+                                    map.put("servingUnit", servingUnit);
+                                    map.put("calorieAmount",category);
+                                    map.put("fat",fat);
+                                    foodListArray.add(map);
+
+                                }
+
+                                myListAdapter = new SimpleAdapter(getActivity(),foodListArray,R.layout.food_list_view,colHEAD,dataCell);
+                                foodList.setAdapter(myListAdapter);
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
+                        }
+
+
+                    }.execute(category  );
                     Toast.makeText(parent.getContext(), "level of activity selected is " + selectedCategory,
                             Toast.LENGTH_LONG).show();
+
+
 
                 }
 
@@ -118,7 +159,11 @@ public class DailyDietUnitFragment extends Fragment {
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
+
             }});
+
+
+
 
 
 

@@ -1,6 +1,127 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
     android:layout_height="match_parent">
 
-</android.support.constraint.ConstraintLayout>
+
+    <TextView
+        android:textSize="24"
+        android:gravity="center"
+        android:id="@+id/textView15"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="Calorie Tracker" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="29dp" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="wrap_content"
+        android:layout_height="188dp"
+        tools:srcCompat="@drawable/tracker" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="86dp" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="154dp"
+        android:gravity="right"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="117dp"
+            android:layout_height="wrap_content"
+
+            android:layout_gravity="right"
+            android:orientation="vertical">
+
+            <TextView
+
+                android:layout_width="249dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/register_user_name_bg"
+                android:text="Goal:" />
+
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_width="249dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/register_user_name_bg"
+                android:text="Total Step:" />
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="249dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/register_user_name_bg"
+                android:text="Total consumed:" />
+
+            <TextView
+                android:id="@+id/textView13"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/register_user_name_bg"
+                android:text="Burned calories:" />
+
+            <TextView
+                android:id="@+id/textView14"
+                android:layout_width="249dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/register_user_name_bg"
+                android:text="All food:" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_gravity="right"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_goal"
+                android:layout_width="249dp"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:background="@drawable/pingk_et_bg"/>
+
+            <TextView
+                android:id="@+id/tv_totalstep"
+                android:layout_width="249dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/pingk_et_bg"
+                android:text="TextView" />
+
+            <TextView
+                android:id="@+id/tv_totalcon"
+                android:layout_width="249dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/pingk_et_bg"
+                android:text="TextView" />
+
+            <TextView
+                android:id="@+id/tv_burnedcal"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/pingk_et_bg"
+                android:text="TextView" />
+
+            <TextView
+                android:id="@+id/tv_allfood"
+                android:layout_width="249dp"
+                android:background="@drawable/pingk_et_bg"
+                android:layout_height="wrap_content"
+                android:text="TextView" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

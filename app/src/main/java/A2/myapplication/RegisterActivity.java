@@ -53,7 +53,7 @@ public class RegisterActivity extends AppCompatActivity{
         tv_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //返回键
+
                 RegisterActivity.this.finish();
             }
         });
