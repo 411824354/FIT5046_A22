@@ -2,9 +2,11 @@ package A2.myapplication;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -65,6 +67,7 @@ public class Home_drawer extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
         Fragment nextFragment = null;
+        FragmentActivity mapACT = null;
         switch (id) {
             case R.id.nav_Home_unit:
                 nextFragment = new MainFragment();
@@ -82,12 +85,15 @@ public class Home_drawer extends AppCompatActivity
                 nextFragment = new ReportFragment();
                 break;
             case R.id.nav_map_unit:
-                nextFragment = new ReportFragment();
+                startActivity( new Intent( Home_drawer.this,MapsActivity.class ) );
+                return true;
 
         }
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.content_frame,
                 nextFragment).commit();
+
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer( GravityCompat.START);
         return true;

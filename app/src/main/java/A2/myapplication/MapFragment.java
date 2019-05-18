@@ -12,6 +12,11 @@ public class MapFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle
             savedInstanceState) {
         vMap = inflater.inflate(R.layout.fragment_map_unit, container, false);
+
+
+
+
+
         return vMap;
     }
 }
