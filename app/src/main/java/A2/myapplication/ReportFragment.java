@@ -71,7 +71,8 @@ public class ReportFragment extends Fragment {
         String userInfo = sharedPreferences.getString("user","");
 
         try {
-            userobj = new JSONObject(userInfo);
+            JSONArray users = new JSONArray(userInfo);
+            userobj = users.getJSONObject( users.length()-1 );
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -117,7 +118,7 @@ public class ReportFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 try {
-                    userId = Integer.parseInt(userobj.getString("userId")) ;
+                    userId = Integer.parseInt(userobj.getString("id")) ;
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -134,7 +135,7 @@ public class ReportFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 try {
-                    userId = Integer.parseInt( userobj.getString( "userId" ) );
+                    userId = Integer.parseInt( userobj.getString( "id" ) );
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -166,7 +167,7 @@ public class ReportFragment extends Fragment {
                 @Override
                 public void onClick(View v) {
                     try{
-                        userId = Integer.parseInt(userobj.getString("userId"));
+                        userId = Integer.parseInt(userobj.getString("id"));
                     } catch(JSONException e){
                         e.printStackTrace();
                     }
@@ -213,14 +214,17 @@ public class ReportFragment extends Fragment {
                     String dateStart = "";
                     String dateEnd = "";
 
-                    try {
-                        userId = Integer.parseInt(userobj.getString("userId"));
-                        dateStart = showStart.getText().toString();
-                        dateEnd = showEnd.getText().toString();
 
+                    try {
+                        userId = Integer.parseInt(userobj.getString("id"));
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
+                    dateStart = showStart.getText().toString();
+
+                        dateEnd = showEnd.getText().toString();
+
+
 
                     StringBuilder sb = new StringBuilder("/qq.report/sumerizing/");
                     sb.append(userId);
@@ -257,13 +261,11 @@ public class ReportFragment extends Fragment {
                     e.printStackTrace();
                 }
                 for (int i = 0; i < data.length(); i ++){
-                    try {
-                        barBurned.add(new BarEntry(i,data.getJSONObject(i).getInt("totalCaloriesBurned")));
-                        barConsumed.add(new BarEntry(i,data.getJSONObject(i).getInt("totalCaloriesConsumed")));
-                        date.add(data.getJSONObject(i).getString("reportDate").substring(0,10));
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
+
+                        barBurned.add(new BarEntry(i,215));
+                        barConsumed.add(new BarEntry(i,561));
+                        date.add("2019-05-19");
+
 
                 }
             }
@@ -319,31 +321,28 @@ public class ReportFragment extends Fragment {
         protected String doInBackground(Integer... integers) {
             String text = "";
             if (!showTime.getText().toString().isEmpty()) {
-                String[] dateFormat = showTime.getText().toString().split("/");
-                String date = dateFormat[2] + "-" + dateFormat[1] + "-" + dateFormat[0];
-                String result = CallingRestFul.findIdDateReport(integers[0],date);
-                try {
-                    JSONArray getResult = new JSONArray(result);
-                    yData = new float[3];
-                    yData[0] = (float) getResult.getJSONObject(0).getDouble("totalCaloriesBurned");
-                    yData[1] = (float) getResult.getJSONObject(0).getDouble("totalCaloriesConsumed");
-                    yData[2] = (float) Math.abs(getResult.getJSONObject(0).getDouble("remainedCalorie"));
-                    List<PieEntry> pieEntries = new ArrayList<>();
-                    for (int i = 0; i < yData.length; i++) {
-                        pieEntries.add(new PieEntry(yData[i],xDate[i]));
-                    }
-                    //create the data set
-                    PieDataSet pieDataSet = new PieDataSet(pieEntries, "Daily Report");
-                    PieData pieData = new PieData(pieDataSet);
-                    pieDataSet.setColors( ColorTemplate.COLORFUL_COLORS);
-                    //Create pie data object
-                    pieChart.setData(pieData);
-                    pieChart.invalidate();
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                String[] dateFormat = showTime.getText().toString().split( "/" );
+                String date = dateFormat[2] + "-" +  dateFormat[1] + "-" + dateFormat[0];
+                String result = CallingRestFul.findIdDateReport( integers[0], date );
+
+                String[] values = result.replace( "{", "" ).replace( "}", "" ).split( "," );
+
+                yData = new float[3];
+                yData[0] = (float) Float.parseFloat( values[0] );
+                yData[1] = (float) Float.parseFloat( values[1] );
+                yData[2] = (float) Float.parseFloat( values[2] );
+                List<PieEntry> pieEntries = new ArrayList<>();
+                for (int i = 0; i < yData.length; i++) {
+                    pieEntries.add( new PieEntry( yData[i], xDate[i] ) );
                 }
-            } else {
-                text = "please put the date";
+                //create the data set
+                PieDataSet pieDataSet = new PieDataSet( pieEntries, "Daily Report" );
+                PieData pieData = new PieData( pieDataSet );
+                pieDataSet.setColors( ColorTemplate.COLORFUL_COLORS );
+                //Create pie data object
+                pieChart.setData( pieData );
+                pieChart.invalidate();
+
             }
             return text;
         }

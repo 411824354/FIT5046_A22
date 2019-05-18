@@ -127,7 +127,7 @@ public class AddNewFood extends AppCompatActivity {
             String calorie = response.get( "calorieAMO" ).toString();
             String fat = response.get( "fatAMO" ).toString();*/
 
-            String nameIs = "name: " ;
+            String nameIs = "name: " + name;
             String detail = "uint: "+unit+"\n"+"calories: "+calorie+"\n"+"fat:"+fat;
             map.put("result", nameIs);
             map.put( "detail",detail );

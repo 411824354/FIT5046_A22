@@ -100,28 +100,28 @@
                 android:layout_width="249dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/pingk_et_bg"
-                android:text="TextView" />
+                android:text="26" />
 
             <TextView
                 android:id="@+id/tv_totalcon"
                 android:layout_width="249dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/pingk_et_bg"
-                android:text="TextView" />
+                android:text="356" />
 
             <TextView
                 android:id="@+id/tv_burnedcal"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/pingk_et_bg"
-                android:text="TextView" />
+                android:text="456" />
 
             <TextView
                 android:id="@+id/tv_allfood"
                 android:layout_width="249dp"
                 android:background="@drawable/pingk_et_bg"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:text="" />
         </LinearLayout>
     </LinearLayout>
 
