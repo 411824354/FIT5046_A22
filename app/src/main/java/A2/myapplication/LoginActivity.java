@@ -86,6 +86,13 @@ public class LoginActivity extends AppCompatActivity {
                             // md5Psw.equals(); 判断，输入的密码加密后，是否与保存在SharedPreferences中一致
                         }else if(md5Password.equals(restfulPassword)){
                             //一致登录成功
+                            //save user object
+                            SharedPreferences sp = getSharedPreferences( "signUpUser", MODE_PRIVATE);
+                            final SharedPreferences.Editor editor = sp.edit();
+                            editor.putString( "username",username );
+
+
+
 
                             Toast.makeText(LoginActivity.this, "login successfully", Toast.LENGTH_SHORT).show();
 

@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentActivity;
@@ -107,9 +108,25 @@ public class Home_drawer extends AppCompatActivity
 
     public void getFirstName(){
         SharedPreferences sp = getSharedPreferences( "signUpInfo",MODE_PRIVATE );
-        String firstname = sp.getString( "firstName","noname" );
+        final String firstname = sp.getString( "firstName","noname" );
         TextView tv_welcome = findViewById( R.id.tv_home_welcome );
         tv_welcome.setText( "welcome "+firstname+" !" );
+        new AsyncTask<String,Void,String>(){
+
+            @Override
+            protected String doInBackground(String... strings) {
+                return CallingRestFul.findUserByName(firstname );
+            }
+            @Override
+            protected void onPostExecute(String user){
+                SharedPreferences sp = getSharedPreferences( "signUpUser", MODE_PRIVATE);
+                final SharedPreferences.Editor editor = sp.edit();
+                editor.putString( "user",user );
+                editor.commit();
+            }
+        }.execute(  );
+
+
     }
 
 //----------------------------------------------------------------------------------------------------

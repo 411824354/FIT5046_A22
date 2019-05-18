@@ -17,7 +17,7 @@ import java.util.Scanner;
 import javax.net.ssl.HttpsURLConnection;
 
 public class GoogleService {
-    private static final String API_KEY = "AIzaSyBEF_Hkr92vXFN-I4iugrVbTakvqhCvNxc";
+    private static final String API_KEY = "AIzaSyCV4H1WZYmzZHVXz_RbfVuapEKAlBjo2NQ";
 
     public static String getLocation(String address) {
         URL url = null;

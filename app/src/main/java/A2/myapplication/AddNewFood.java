@@ -1,12 +1,14 @@
 package A2.myapplication;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
@@ -72,7 +74,8 @@ public class AddNewFood extends AppCompatActivity {
                 search.execute(inputWord);
 
 
-
+                SearchAsyncTask searchAsyncTask = new SearchAsyncTask();
+                searchAsyncTask.execute(inputWord);
 
             }
 
@@ -134,6 +137,24 @@ public class AddNewFood extends AppCompatActivity {
             foodList.setAdapter(myListAdapter);
         }
 
+    }
+
+    private class SearchAsyncTask extends AsyncTask<String, Void, Bitmap> {
+
+        @Override
+        protected Bitmap doInBackground(String... params) {
+            String imageObject = GoogleSearchAPI.search(params[0], new String[]{"num"}, new String[]{"1"});
+            String imageLink = GoogleSearchAPI.getImage(imageObject);
+            Bitmap image = GoogleSearchAPI.getBitmapFromURL(imageLink);
+            return image;
+        }
+
+
+        @Override
+        protected void onPostExecute(Bitmap result) {
+            ImageView iv = findViewById(R.id.img_search_result);
+            iv.setImageBitmap(result);
+        }
     }
     
 
