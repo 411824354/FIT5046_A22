@@ -18,20 +18,17 @@
         android:layout_height="104dp"
         android:contentDescription="@string/nav_header_desc"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
-        android:src="@drawable/ic_airline_seat_legroom_extra_black_24dp" />
+        android:src="@drawable/ic_fingerprint_black_24dp" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
-        android:text="@string/nav_header_title"
+        android:text="Calorie Tracker"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+
         />
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/nav_header_subtitle" />
+
 
 </LinearLayout>

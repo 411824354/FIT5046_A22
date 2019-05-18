@@ -13,11 +13,16 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 public class Home_drawer extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    private TextView tv_Goal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +33,7 @@ public class Home_drawer extends AppCompatActivity
 //----------------------------------------------------------------------------------------------
 // files
         TextView tv_time,tv_welcome;
+        tv_Goal= findViewById( R.id.tv_Goal );
 
 
 //----------------------------------------------------------------------------------------------
@@ -39,6 +45,37 @@ public class Home_drawer extends AppCompatActivity
         TimeThread timeThread = new TimeThread(tvDate);//tvDate 是显示时间的控件TextView
         timeThread.start();//启动线程
         getFirstName();
+        new AsyncTask<String, Void, String>() {
+            @Override
+            protected String doInBackground(String... strings) {
+                String goal = getSharedPreferences( "Goal",MODE_PRIVATE ).getString( "theGoal","Please set your Goal" );
+                tv_Goal.setText( "Goal: "+goal +"kcal");
+                return null;
+            }
+        }.execute(  );
+
+        Button btn_setGoal = findViewById( R.id.btn_setGaol );
+        btn_setGoal.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditText et_setGoal = findViewById( R.id.et_setUpGoal_home );
+                String goal = et_setGoal.getText().toString().trim();
+                if (!TextUtils.isEmpty(goal)) {
+                    tv_Goal.setText("Goal: " +goal+"kcal" );
+                    new AsyncTask<String, Void, String>() {
+                        @Override
+                        protected String doInBackground(String... strings) {
+                            SharedPreferences.Editor editor = getSharedPreferences( "Goal", MODE_PRIVATE ).edit();
+                            editor.putString( "theGoal", strings[0] );
+                            editor.commit();
+                            return null;
+                        }
+                    }.execute( goal );
+                }
+            }
+        } );
+
+
 
 
 //----------------------------------------------------------------------------------------------
