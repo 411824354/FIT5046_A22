@@ -9,15 +9,8 @@
     android:orientation="vertical"
 
     >
-    <!--标题栏-->
     <include layout="@layout/main_title_bar"></include>
-    <!--显示头像，记得加入id iv_head -->
-    <!--输入框-->
 
-    <!--输入框-->
-
-    <!--按钮-->
-    <!--显示tv register , find_psw -->
 
     <TextView
         android:id="@+id/login_title"
@@ -25,6 +18,7 @@
         android:layout_height="108dp"
         android:textSize="54dp"
         android:text="Calorie Tracker"
+        android:textColor="#DE000000"
         android:gravity="center"
         android:textStyle="bold"/>
 
@@ -65,14 +59,24 @@
         android:hint="please input user password"
         android:inputType="textPassword"
         android:paddingLeft="8dp"
-        android:singleLine="true"
+
         android:textColor="#000000"
         android:textColorHint="@color/colorAccent"
         android:textSize="14sp" />
 
+    <CheckBox
+        android:id="@+id/box_hidpsw"
+        android:layout_width="336dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ePassword"
+        android:layout_gravity="center"
+        android:text="Show Password"
+        android:textStyle="bold"
+        android:textColor="#DE000000" />
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="35dp"></LinearLayout>
+        android:layout_height="11dp"></LinearLayout>
     <Button
         android:id="@+id/btn_login"
         android:layout_width="fill_parent"
@@ -108,7 +112,6 @@
 
 
             android:textSize="18sp" />
-        <!--layout_weight="1" layout_width="0dp"实现均分效果-->
         <TextView
             android:id="@+id/editText"
             android:layout_width="3dp"

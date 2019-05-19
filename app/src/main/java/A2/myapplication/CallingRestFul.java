@@ -373,7 +373,7 @@ public static int getCurrentId() {
         String textResult = "";
         //Making HTTP request
         try {
-            url = new URL(URLaddress);
+            url = new URL(BASE_URL+URLaddress);
             //open the connection
             conn = (HttpURLConnection) url.openConnection();
             //set the timeout

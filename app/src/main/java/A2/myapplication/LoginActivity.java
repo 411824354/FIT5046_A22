@@ -7,8 +7,11 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,14 +23,16 @@ import org.json.JSONObject;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private TextView tv_back,btnSingUp,btnFindPsw;
+    private TextView tv_back,btnSingUp;
     private Button btn_login;
-    private EditText et_user_name,et_psw;//编辑框
-
+    private EditText et_user_name,et_psw;
+    private CheckBox box;
+    private boolean isChecked = true;
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
         //设置此界面为竖屏
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         btnSingUp = findViewById( R.id.btn_SignUp );
@@ -35,6 +40,21 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity( new Intent( LoginActivity.this,RegisterActivity.class ) );
+        box = findViewById( R.id.box_hidpsw );
+        box.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isChecked) {
+                    et_psw.setTransformationMethod( HideReturnsTransformationMethod.getInstance());
+                    isChecked = false;
+                }
+                else {
+                    et_psw.setTransformationMethod( PasswordTransformationMethod.getInstance());
+                    isChecked = true;
+                }
+                et_psw.setSelection(et_psw.getText().toString().length());
+            }
+        });
 
             }
 
@@ -53,6 +73,10 @@ public class LoginActivity extends AppCompatActivity {
 
                 //---------------
                 //validation
+
+
+
+
                 final String md5Password = MD5Utils.md5( password );
 
                 GetFirstNameAsynckTask getFirstASK = new GetFirstNameAsynckTask();

@@ -224,14 +224,11 @@ public class ReportFragment extends Fragment {
 
                         dateEnd = showEnd.getText().toString();
 
+                    String url = "qq.report/sumerizing/"+ userId +"/" + dateStart+"/" + dateEnd;
 
 
-                    StringBuilder sb = new StringBuilder("/qq.report/sumerizing/");
-                    sb.append(userId);
-                    sb.append("/" + dateStart);
-                    sb.append("/" + dateEnd);
 
-                    new CreateBarChartAsyncTask().execute(sb.toString());
+                    new CreateBarChartAsyncTask().execute(url);
                 }
             });
 
@@ -250,24 +247,23 @@ public class ReportFragment extends Fragment {
 
         @Override
         protected void onPostExecute(String s) {
+
+            String[] values = s.replace( "{", "" ).replace( "}", "" ).split( "," );
             barBurned = new ArrayList<>();
             barConsumed= new ArrayList<>();
             date = new ArrayList<>();
             if (!s.equals("")){
                 JSONArray data = null;
-                try {
-                    data = new JSONArray(s);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                for (int i = 0; i < data.length(); i ++){
-
-                        barBurned.add(new BarEntry(i,215));
-                        barConsumed.add(new BarEntry(i,561));
-                        date.add("2019-05-19");
 
 
-                }
+
+                        barBurned.add(new BarEntry(0,Float.parseFloat(values[0])));
+                        barConsumed.add(new BarEntry(1,Float.parseFloat(values[1])));
+                        Date dat = new Date();
+                        date.add(dat.toString());
+
+
+
             }
 
             generateBarChart();
